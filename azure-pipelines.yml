@@ -1,9 +1,17 @@
 # Starter pipeline
+- task: configuredatabricks@0
+  inputs:
+    url: 'https://adb-5982401339317117.17.azuredatabricks.net/'
+    token: 'dapif3659152bf63b487a370d429c1377d97'
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
 trigger:
+- task: executenotebook@0
+  inputs:
+    notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/treino'
+    existingClusterId: '0512-164724-work453'
 - master
 
 pool:
