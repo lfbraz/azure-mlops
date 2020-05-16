@@ -48,3 +48,5 @@ steps:
   inputs:
     notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/deploy'
     existingClusterId: '0512-164724-work453'
+
+- task: waitexecution@0
