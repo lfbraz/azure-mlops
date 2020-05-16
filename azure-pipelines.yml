@@ -18,6 +18,11 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+- task: configuredatabricks@0
+  inputs:
+    url: 'https://adb-5982401339317117.17.azuredatabricks.net'
+    token: 'dapi94019417b4d0216b1eaa0e99741a162e'
+  
 - task: executenotebook@0
   inputs:
     notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/treino'
