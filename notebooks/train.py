@@ -102,3 +102,4 @@ PATIENCE = 100
 
 #TESTS
 history, model = train(EPOCHS, VALIDATION_SPLIT, PATIENCE)
+print('Model Finished')
