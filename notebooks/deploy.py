@@ -93,3 +93,7 @@ endpoint_name = 'car-regression-service-dev'
 tags={'Framework': "Tensorflow", 'Tipo': "Regressão"}
 
 deploy(workspace_location, workspace_name, resource_group, subscription_id, model_name, model_path, model_description, tags)
+
+# COMMAND ----------
+
+print('TESTS')
