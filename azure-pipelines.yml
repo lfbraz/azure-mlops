@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
+- script: echo Begin MLOps Pipeline !
   displayName: 'Run a one-line script'
 
 - script: |
@@ -26,20 +26,20 @@ steps:
 
 - task: configuredatabricks@0
   inputs:
-    url: 'https://adb-5982401339317117.17.azuredatabricks.net'
-    token: 'dapi94019417b4d0216b1eaa0e99741a162e'
+    url: $(databricks-url)
+    token: $(databricks-token)
   
 - task: executenotebook@0
   inputs:
     notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/treino'
-    existingClusterId: '0512-164724-work453'
+    existingClusterId: $(databricks-cluster-id)
 
 - task: waitexecution@0
 
 - task: executenotebook@0
   inputs:
     notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/entry'
-    existingClusterId: '0512-164724-work453'
+    existingClusterId: $(databricks-cluster-id)
 
 
 - task: waitexecution@0
@@ -47,6 +47,6 @@ steps:
 - task: executenotebook@0
   inputs:
     notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/deploy'
-    existingClusterId: '0512-164724-work453'
+    existingClusterId: $(databricks-cluster-id)
 
 - task: waitexecution@0
