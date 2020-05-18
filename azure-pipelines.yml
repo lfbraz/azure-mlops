@@ -45,9 +45,9 @@ steps:
 
 - task: waitexecution@0
 
-- task: executenotebook@0
-  inputs:
-    notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/deploy'
-    existingClusterId: $(databricks-cluster-id)
+#- task: executenotebook@0
+#  inputs:
+#    notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/deploy'
+#    existingClusterId: $(databricks-cluster-id)
 
-- task: waitexecution@0
+#- task: waitexecution@0
