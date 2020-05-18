@@ -5,6 +5,7 @@
 
 trigger:
 - master
+condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
 
 pool:
   vmImage: 'ubuntu-latest'
