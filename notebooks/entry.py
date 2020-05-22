@@ -1,6 +1,5 @@
 # Databricks notebook source
 import tensorflow as tf
-from tensorflow.keras.models import load_model
 import json
 import pandas as pd
 import os
@@ -11,13 +10,13 @@ def init():
     global train_stats
 
     # Get the path where the deployed model can be found.
-    model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), './models/model-regressao-tensorflow')
+    model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), './models/')
     
     # Load keras
-    model = load_model(model_path)
+    model = tf.keras.models.load_model(model_path + 'model-regressao-tensorflow.h5')
     
     # Load train_stats
-    train_stats = pd.read_pickle(model_path + "/train_stats.pkl")
+    train_stats = pd.read_pickle(model_path + "train_stats.pkl")
 
 def norm(x):
   return (x - train_stats['mean']) / train_stats['std']
