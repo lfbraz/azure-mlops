@@ -96,4 +96,4 @@ deploy(workspace_location, workspace_name, resource_group, subscription_id, mode
 
 # COMMAND ----------
 
-print('Deploy alterado')
+print('Deploy alterado ')
