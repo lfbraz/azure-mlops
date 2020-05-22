@@ -74,6 +74,18 @@ def build_model(keys):
                 metrics=['mae', 'mse'])
   return model
 
+def save_model(model, train_stats, model_name, model_path, stats_file):  
+  # Persistir o modelo no dbfs
+  model.save(model_path + model_name)
+
+  # Persistir os dados para normalização
+  train_stats.to_pickle(model_path + stats_file)
+
+  # Copy to dbfs
+  dbutils.fs.cp('file:/tmp/{}'.format(model_name), 'dbfs:/models/{}'.format(model_name))
+  dbutils.fs.cp('file:/tmp/{}'.format(stats_file), 'dbfs:/models/{}'.format(stats_file))
+
+  print('Modelo {} persistido no diretório: /models/'.format(NOME_MODELO_DEPLOY))
 
 def train(epochs, validation_split, patience=10, verbose=0):
   dataset = download_dataset()
@@ -92,7 +104,7 @@ def train(epochs, validation_split, patience=10, verbose=0):
   history = model.fit(train_dataset, train_labels, epochs=epochs,
                       validation_split = validation_split, verbose=verbose, callbacks=[early_stop, PrintDot()])
   
-  return history, model
+  return history, model, stats
 
 # COMMAND ----------
 
@@ -101,5 +113,13 @@ VALIDATION_SPLIT = 0.2
 PATIENCE = 100
 
 #TESTS
-history, model = train(EPOCHS, VALIDATION_SPLIT, PATIENCE)
-print('Model Finished')
+history, model, stats = train(EPOCHS, VALIDATION_SPLIT, PATIENCE)
+print('Model Trained')
+
+# COMMAND ----------
+
+DIRETORIO_MODELO = '/tmp/'
+NOME_MODELO_DEPLOY = 'model-regressao-tensorflow.h5'
+NOME_ARQ_STATS = 'train_stats.pkl'
+
+save_model(model, stats, NOME_MODELO_DEPLOY, DIRETORIO_MODELO, NOME_ARQ_STATS)
