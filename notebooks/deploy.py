@@ -74,7 +74,7 @@ def deploy_container_instance(workspace, endpoint_name, inference_config, model_
 
 def deploy(workspace_location, workspace_name, resource_group, subscription_id, model_name, model_path, model_description='',tags={}):
   workspace = get_workspace(workspace_location, workspace_name, resource_group, subscription_id)
-  inference_config = get_config('/dbfs/models/model-regressao-tensorflow/score.py')
+  inference_config = get_config('/dbfs/models/score.py')
   model_azure = register_model(workspace, model_path, model_name, model_description, tags)
   scoring_uri = deploy_container_instance(workspace, endpoint_name, inference_config, model_azure)
 
