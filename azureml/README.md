@@ -70,4 +70,7 @@ After the approval, the next stage **(deploy to Production)** will be triggered:
 
 When all the stages are completed we can see the **endpoints** in Azure ML Workspace:
 
-![endpoints](images/ml-endpoints.PNG?raw=true)
+![endpoints](images/ml-endpoints.PNG?raw=true)  
+  
+  
+![complete](images/final-release.PNG?raw=true)
