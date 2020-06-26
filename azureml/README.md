@@ -1,5 +1,5 @@
 # Azure MLOps - Release Pipeline
-In this tutorial, I will demonstrate how to configure Azure DevOps to create an MLOps Release Pipeline using models created in Azure Machine Learning. In this example, we will deploy two endpoints that consume an already trained model registered in an Azure Machine Learning Workspace.
+In this tutorial, I will demonstrate how to configure Azure DevOps to create a MLOps Release Pipeline using models created in Azure Machine Learning. In this example, we will deploy two endpoints that consume an already trained model registered in an Azure Machine Learning Workspace.
 
 ## Create MLOps Release Pipelines using [Azure Devops](https://dev.azure.com/) and [Azure Machine Learning](https://azure.microsoft.com/pt-br/services/machine-learning/)
 
