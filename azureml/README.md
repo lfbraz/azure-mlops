@@ -1,5 +1,5 @@
 # Azure MLOps - Release Pipeline
-In this tutorial we will demonstrate how to configure Azure Devops to create a MLOps Release Pipeline using models created in Azure Machine Learning. In this example we will deploy two endpoints that consume an already trained model registered in an Azure Machine Learning Workspace.
+In this tutorial, I will demonstrate how to configure Azure DevOps to create an MLOps Release Pipeline using models created in Azure Machine Learning. In this example, we will deploy two endpoints that consume an already trained model registered in an Azure Machine Learning Workspace.
 
 ## Create MLOps Release Pipelines using [Azure Devops](https://dev.azure.com/) and [Azure Machine Learning](https://azure.microsoft.com/pt-br/services/machine-learning/)
 
@@ -13,15 +13,15 @@ With the service connection we are able to create a new [Release Pipeline](https
 
 ![New Release Pipeline](images/new-release-pipeline.PNG?raw=true)
 
-In our case we have an Azure Devops project named **MLOps-LAB**, please feel free to use your own Azure devops project.
+In our case we have an Azure DevOps project named **MLOps-LAB**, please feel free to use your own Azure DevOps project.
 
-Now we will add the model artifacts. We will use two sources: A **Repository source** (can be *Azure Devops Repos, Github*, etc.) and an **Azure ML Model Artifact** (the model you have registered in your Azure ML Workspace):
+Now we will add the model artifacts. We will use two sources: A **Repository source** (can be *Azure DevOps Repos, Github*, etc.) and an **Azure ML Model Artifact** (the model you have registered in your Azure ML Workspace):
 
 ![Artifacts](images/artifacts.PNG?raw=true)
 
 The **Repository source** will contain your deployment configs (`aciDeploymentConfig.yml` or `aksDeploymentConfig.yml`, `conda_env_v_1_0_0.yml`, `inferenceConfig.yml` and `score.py`). In this [folder](https://github.com/lfbraz/azure-mlops/tree/master/azureml/config) we have some examples of these files.  
 
-In the **Azure ML Model Artifact** we will connect the Azure Devops with our Azure ML Workspace using the `Service Connection` we created before:
+In the **Azure ML Model Artifact** we will connect the Azure DevOps with our Azure ML Workspace using the `Service Connection` we created before:
 
 ![AzureML Artifact](images/add-azureml-artifact.jpg?raw=true)
 
@@ -33,7 +33,7 @@ In each stage we will configure an **Azure ML Model Deploy Task** using the `aci
 
 ![Deploy Config](images/azureml-deploy-task.PNG?raw=true)
 
-Finally, we can add a Pre-deployment condition to be able to request an approval before deploying to **Production** stage. It is useful to validade the **QA** endpoint before put it on **Production**.
+Finally, we can add a Pre-deployment condition to be able to request approval before deploying to **Production** stage. It is useful to validate the **QA** endpoint before putting it on **Production**.
 
 Click on:
 ![Add Pre-Deployment condition](images/add-pre-deployment-condition.PNG?raw=true)
