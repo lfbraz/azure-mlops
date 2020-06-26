@@ -20,7 +20,7 @@ This configurations can be added in Azure Devops to build a MLOps flow. I sugges
 First of all, install [Azure ML Template](https://marketplace.visualstudio.com/items?itemName=ms-air-aiagility.vss-services-azureml&targetId=09d19ee8-b94a-4f99-a763-11cc0fe1a111&utm_source=vstsproduct&utm_medium=ExtHubManageList) in your Azure Devops organization:\
 \
 
-![Azure ML Template][images/azureml-template.PNG]
+![Azure ML Template](images/azureml-template.PNG?raw=true)
 
 
 
