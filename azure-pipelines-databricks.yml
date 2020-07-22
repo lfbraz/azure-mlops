@@ -8,11 +8,11 @@ trigger:
 
 stages:
 - stage: Build
-  displayName: 'Train, Evaluate & Register Model'
+  displayName: 'Build'
   jobs:
 
   - job: Train
-    displayName: 'Train, Evaluate & Register Model'
+    displayName: 'Train and Evaluate Model'
     pool:
       vmImage: 'ubuntu-latest'
     steps:
