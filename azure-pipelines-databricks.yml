@@ -32,17 +32,17 @@ stages:
     - task: executenotebook@0
       displayName: 'Train model'
       inputs:
-        notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/treino'
+        notebookPath: '/Shared/lubraz@microsoft.com/tensorflow-mlops/train'
         existingClusterId: $(databricks-cluster-id)
 
     - task: executenotebook@0
       displayName: 'Entry Script'
       inputs:
-        notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/entry'
+        notebookPath: '/Shared/lubraz@microsoft.com/tensorflow-mlops/entry'
         existingClusterId: $(databricks-cluster-id)
 
 - stage: DEV
-  displayName: 'Register and Deploy to Development'
+  displayName: 'Development'
   jobs:
 
   - job: ACI
@@ -65,7 +65,37 @@ stages:
     - task: executenotebook@0
       displayName: 'Deploy to ACI'
       inputs:
-        notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/deploy'
+        notebookPath: '/Shared/lubraz@microsoft.com/tensorflow-mlops/deploy-to-dev'
+        existingClusterId: $(databricks-cluster-id)
+
+
+    - task: waitexecution@0
+
+- stage: PROD
+  displayName: 'Production'
+  jobs:
+
+  - job: AKS
+    displayName: 'Deploy to AKS'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+        architecture: 'x64'
+
+    - task: configuredatabricks@0
+      displayName: 'Configure Databricks (start cluster if it is not running)'
+      inputs:
+        url: $(databricks-url)
+        token: $(databricks-token)
+    - task: executenotebook@0
+      displayName: 'Deploy to AKS'
+      inputs:
+        notebookPath: '/Shared/lubraz@microsoft.com/tensorflow-mlops/deploy-to-prod'
         existingClusterId: $(databricks-cluster-id)
 
 
