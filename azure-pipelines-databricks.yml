@@ -14,6 +14,7 @@ stages:
     displayName: 'Train and Evaluate Model'
     pool:
       vmImage: 'ubuntu-latest'
+
     steps:
 
     - task: UsePythonVersion@0
@@ -23,22 +24,19 @@ stages:
         architecture: 'x64'
 
     - task: configuredatabricks@0
+      displayName: 'Configure Databricks (start cluster if it is not running)'
       inputs:
         url: $(databricks-url)
         token: $(databricks-token)
   
     - task: executenotebook@0
+      displayName: 'Train model'
       inputs:
         notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/treino'
         existingClusterId: $(databricks-cluster-id)
 
-  - job: Entry
-    displayName: 'Define an Entry Script'
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-
     - task: executenotebook@0
+      displayName: 'Entry Script'
       inputs:
         notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/entry'
         existingClusterId: $(databricks-cluster-id)
