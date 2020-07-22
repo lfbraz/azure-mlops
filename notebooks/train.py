@@ -123,5 +123,5 @@ NOME_MODELO_DEPLOY = 'model-regressao-tensorflow.h5'
 NOME_ARQ_STATS = 'train_stats.pkl'
 
 save_model(model, stats, NOME_MODELO_DEPLOY, DIRETORIO_MODELO, NOME_ARQ_STATS)
-print('done')
+
 print('done')
