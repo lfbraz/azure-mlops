@@ -32,13 +32,13 @@ stages:
     - task: executenotebook@0
       displayName: 'Train model'
       inputs:
-        notebookPath: '/Shared/lubraz@microsoft.com/tensorflow-mlops/train'
+        notebookPath: '/Shared/tensorflow-mlops/train'
         existingClusterId: $(databricks-cluster-id)
 
     - task: executenotebook@0
       displayName: 'Entry Script'
       inputs:
-        notebookPath: '/Shared/lubraz@microsoft.com/tensorflow-mlops/entry'
+        notebookPath: '/Shared/tensorflow-mlops/entry'
         existingClusterId: $(databricks-cluster-id)
 
 - stage: DEV
@@ -65,7 +65,7 @@ stages:
     - task: executenotebook@0
       displayName: 'Deploy to ACI'
       inputs:
-        notebookPath: '/Shared/lubraz@microsoft.com/tensorflow-mlops/deploy-to-dev'
+        notebookPath: '/Shared/tensorflow-mlops/deploy-to-dev'
         existingClusterId: $(databricks-cluster-id)
 
 
@@ -95,7 +95,7 @@ stages:
     - task: executenotebook@0
       displayName: 'Deploy to AKS'
       inputs:
-        notebookPath: '/Shared/lubraz@microsoft.com/tensorflow-mlops/deploy-to-prod'
+        notebookPath: '/Shared/tensorflow-mlops/deploy-to-prod'
         existingClusterId: $(databricks-cluster-id)
 
 
