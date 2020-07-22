@@ -1,0 +1,62 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+stages:
+- stage: Build
+  displayName: 'Train, Evaluate & Register Model'
+  jobs:
+
+  - job: Train
+    displayName: 'Train, Evaluate & Register Model'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+        architecture: 'x64'
+
+    - task: configuredatabricks@0
+      inputs:
+        url: $(databricks-url)
+        token: $(databricks-token)
+  
+    - task: executenotebook@0
+      inputs:
+        notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/treino'
+        existingClusterId: $(databricks-cluster-id)
+
+  - job: Entry
+    displayName: 'Define an Entry Script'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+
+    - task: executenotebook@0
+      inputs:
+        notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/entry'
+        existingClusterId: $(databricks-cluster-id)
+
+- stage: DEV
+  displayName: 'Register and Deploy to Development'
+  jobs:
+
+  - job: ACI
+    displayName: 'Deploy to ACI'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+
+    - task: executenotebook@0
+      inputs:
+        notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/deploy'
+        existingClusterId: $(databricks-cluster-id)
+
+    - task: waitexecution@0
