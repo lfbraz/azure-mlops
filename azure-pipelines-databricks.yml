@@ -57,10 +57,16 @@ stages:
         addToPath: true
         architecture: 'x64'
 
+    - task: configuredatabricks@0
+      displayName: 'Configure Databricks (start cluster if it is not running)'
+      inputs:
+        url: $(databricks-url)
+        token: $(databricks-token)
     - task: executenotebook@0
       displayName: 'Deploy to ACI'
       inputs:
         notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/deploy'
         existingClusterId: $(databricks-cluster-id)
+
 
     - task: waitexecution@0
