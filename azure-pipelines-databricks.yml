@@ -51,7 +51,14 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
 
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+        architecture: 'x64'
+
     - task: executenotebook@0
+      displayName: 'Deploy to ACI'
       inputs:
         notebookPath: '/Users/lubraz@microsoft.com/tensorflow-mlops/deploy'
         existingClusterId: $(databricks-cluster-id)
