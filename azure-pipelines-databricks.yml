@@ -8,7 +8,6 @@ trigger:
 
 stages:
 - stage: Build
-  displayName: 'Build'
   jobs:
 
   - job: Train
