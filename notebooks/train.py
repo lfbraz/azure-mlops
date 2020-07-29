@@ -62,7 +62,7 @@ def norm(dataset, train_stats):
 
 def build_model(keys):
   model = keras.Sequential([
-    layers.Dense(64, activation='relu', input_shape=[len(keys)]),
+    layers.Dense(128, activation='relu', input_shape=[len(keys)]),
     layers.Dense(64, activation='relu'),
     layers.Dense(1)
   ])
@@ -124,4 +124,4 @@ NOME_ARQ_STATS = 'train_stats.pkl'
 
 save_model(model, stats, NOME_MODELO_DEPLOY, DIRETORIO_MODELO, NOME_ARQ_STATS)
 
-print('done')
+print('done - MLOps')
